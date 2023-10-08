@@ -2,6 +2,7 @@ import { Box } from "@mui/material";
 import classNames from "classnames";
 
 import useStyles from "./OrgChartStyles";
+import ProfileCard from "./ProfileCard";
 
 export default function OrgChart() {
     const {
@@ -18,7 +19,11 @@ export default function OrgChart() {
     return (
         <Box className={container}>
             <Box component="h1" className={classNames(level1, rectangle)}>
-                CEO
+                <ProfileCard
+                    profileImgSrc="https://i.pravatar.cc/300"
+                    name="Yoshi Kenna"
+                    title="CEO"
+                />
             </Box>
             <Box component="ol" className={level2Wrapper}>
                 <Box component="li">

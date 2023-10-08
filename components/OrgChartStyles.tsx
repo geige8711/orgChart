@@ -21,6 +21,7 @@ const useStyles = makeStyles((theme: Theme) => ({
         margin: "0 auto 40px",
         background: "#8dccad",
         position: "relative",
+
         "&:before": {
             content: '""',
             position: "absolute",
@@ -46,6 +47,7 @@ const useStyles = makeStyles((theme: Theme) => ({
         [theme.breakpoints.down(700)]: {
             padding: "20px 10px",
         },
+        borderRadius: "10px",
     },
     level2Wrapper: {
         position: "relative",
@@ -70,31 +72,19 @@ const useStyles = makeStyles((theme: Theme) => ({
             height: "2px",
             backgroundColor: "black",
             [theme.breakpoints.down(700)]: {
-                left: "-20%",
+                left: "-20px",
                 width: "2px",
                 height: "calc(100% + 40px)",
             },
         },
-        "&:after": {
-            display: "none",
-            content: '""',
-            position: "absolute",
-            let: "-20px",
-            bottom: "-20px",
-            width: "calc(100% + 20px)",
-            height: "2px",
-            backgroundColor: "black",
-            [theme.breakpoints.down(700)]: {
-                display: "block",
-            },
-        },
+
         "& li": {
             position: "relative",
         },
         "& > li:before": {
             content: '""',
             position: "absolute",
-            let: "50%",
+            left: "50%",
             bottom: "100%",
             transform: "translateX(-50%)",
             width: "2px",

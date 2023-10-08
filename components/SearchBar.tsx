@@ -9,9 +9,10 @@ export default function SearchBar() {
             component="div"
             sx={{
                 position: "relative",
-                display: "inline-block",
-                width: "800px",
-                maxWidth: "100%",
+                display: "block",
+                width: "80vw",
+                maxWidth: "800px",
+                // marginX: "2px",
                 backgroundColor: "white",
                 borderRadius: "4px",
             }}
@@ -22,7 +23,6 @@ export default function SearchBar() {
                     width: "100%",
                 }}
                 onInput={(e) => {}}
-                label="Search Name"
                 variant="outlined"
                 placeholder="Search..."
                 size="medium"
