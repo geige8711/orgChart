@@ -19,9 +19,6 @@ const useStyles = makeStyles({
 export default function Index() {
     const { main, banner } = useStyles();
 
-    useEffect(() => {
-        console.log(document.getElementById("search-bar"));
-    }, []);
     return (
         <Box>
             <Navbar />
