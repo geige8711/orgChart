@@ -25,7 +25,6 @@ const useStyles = makeStyles((theme: Theme) => ({
         margin: "0 auto 40px",
         background: "#8dccad",
         position: "relative",
-
         "&:before": {
             content: '""',
             position: "absolute",
@@ -203,6 +202,17 @@ const useStyles = makeStyles((theme: Theme) => ({
     "@keyframes blink": {
         "50%": {
             opacity: 0,
+        },
+    },
+    "@keyframes borderBlink": {
+        from: {
+            borderColor: "transparent",
+        },
+        to: {
+            borderColor: "transparent",
+        },
+        "50%": {
+            borderColor: "red",
         },
     },
 }));

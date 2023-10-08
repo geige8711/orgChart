@@ -31,7 +31,7 @@ export default function ProfileNode({
 
     const { rectangle, expandIndicator, level1, level2, level3, level4 } =
         useStyles();
-    const [isExpand, setIsExpand] = React.useState<boolean>(false);
+
     const getLevelClass = (level: number) => {
         switch (level) {
             case 1:
@@ -51,6 +51,7 @@ export default function ProfileNode({
             sx={style}
         >
             <Box
+                id={`${id}`}
                 component="div"
                 sx={{
                     display: "flex",
@@ -96,12 +97,10 @@ export default function ProfileNode({
                             JSON.stringify(structureState)
                         );
                         if (id) {
-                            copiedStructureState.structure[id] = !isExpand;
+                            copiedStructureState.structure[id] =
+                                !structureState.structure[id];
                             dispatch(updateStructure(copiedStructureState));
                         }
-                        setIsExpand((o) => {
-                            return !o;
-                        });
                     }}
                     component="div"
                     className={expandIndicator}
@@ -122,7 +121,7 @@ export default function ProfileNode({
                         cursor: "pointer",
                     }}
                 >
-                    {isExpand ? (
+                    {id && structureState.structure[id] ? (
                         <KeyboardDoubleArrowUpSharp
                             htmlColor="grey"
                             fontSize="small"

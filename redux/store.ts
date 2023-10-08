@@ -1,10 +1,12 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import StructureReducer from "./slices/structure";
+import HighlightReducer from "./slices/highlight";
 // Or from '@reduxjs/toolkit/query/react'
 import { setupListeners } from "@reduxjs/toolkit/query";
 import { CurriedGetDefaultMiddleware } from "@reduxjs/toolkit/dist/getDefaultMiddleware";
 const appReducer = combineReducers({
     structure: StructureReducer,
+    highlight: HighlightReducer,
 });
 
 export const store = configureStore({

@@ -5,6 +5,7 @@ import Footer from "../components/Footer";
 import Image from "next/image";
 import SearchBar from "../components/SearchBar";
 import OrgChart from "../components/OrgChart";
+import { useEffect } from "react";
 
 const useStyles = makeStyles({
     main: {
@@ -17,6 +18,10 @@ const useStyles = makeStyles({
 });
 export default function Index() {
     const { main, banner } = useStyles();
+
+    useEffect(() => {
+        console.log(document.getElementById("search-bar"));
+    }, []);
     return (
         <Box>
             <Navbar />

@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, SxProps, Theme } from "@mui/material";
 import classNames from "classnames";
 
 import useStyles from "./OrgChartStyles";
@@ -8,6 +8,7 @@ import { Employee, employeeList } from "../utility/mockData";
 import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { StructureState, updateStructure } from "../redux/slices/structure";
+import { HighlightState, updateHighlight } from "../redux/slices/highlight";
 
 export interface OrgStructure {
     id: number | undefined;
@@ -22,12 +23,20 @@ export interface OrgStructure {
 export default function OrgChart() {
     const dispatch = useAppDispatch();
     const structureState = useAppSelector((state) => state.structure);
+    const highlightState = useAppSelector((state) => state.highlight);
 
     useEffect(() => {
         const copiedStructureState: StructureState = JSON.parse(
             JSON.stringify(structureState)
         );
+        const copiedHighlightState: HighlightState = JSON.parse(
+            JSON.stringify(highlightState)
+        );
         employeeList.forEach((em) => {
+            copiedHighlightState.highlight = {
+                [em.id]: false,
+                ...copiedHighlightState.highlight,
+            };
             if (em.level !== 4) {
                 copiedStructureState.structure = {
                     [em.id]: false,
@@ -36,6 +45,7 @@ export default function OrgChart() {
             }
         });
         dispatch(updateStructure(copiedStructureState));
+        dispatch(updateHighlight(copiedHighlightState));
     }, []);
 
     const { container, level2Wrapper, level3Wrapper, level4Wrapper } =
@@ -86,6 +96,22 @@ export default function OrgChart() {
         return initial;
     }, initial);
 
+    const hightlightIndicator: SxProps<Theme> = {
+        border: "2px solid red",
+        "@keyframes borderBlink": {
+            from: {
+                borderColor: "transparent",
+            },
+            to: {
+                borderColor: "transparent",
+            },
+            "50%": {
+                borderColor: "red",
+            },
+        },
+        animation: "borderBlink 1s step-end infinite",
+    };
+
     return (
         <Box className={container}>
             <ProfileNode
@@ -94,13 +120,17 @@ export default function OrgChart() {
                 profileImgSrc={orgStructure.profileImageUrl}
                 name={orgStructure.name}
                 title={orgStructure.jobTitle}
-                style={
-                    orgStructure.id && structureState.structure[orgStructure.id]
-                        ? {}
-                        : {
-                              "&:before": { display: "none" },
-                          }
-                }
+                style={{
+                    "&:before": {
+                        ...(orgStructure.id &&
+                            !structureState.structure[orgStructure.id] && {
+                                display: "none",
+                            }),
+                    },
+                    ...(orgStructure.id &&
+                        highlightState.highlight[orgStructure.id] &&
+                        hightlightIndicator),
+                }}
             />
             <Box
                 component="ol"
@@ -123,14 +153,19 @@ export default function OrgChart() {
                                 profileImgSrc={level2.profileImageUrl}
                                 name={level2.name}
                                 title={level2.jobTitle}
-                                style={
-                                    level2.id &&
-                                    structureState.structure[level2.id]
-                                        ? {}
-                                        : {
-                                              "&:before": { display: "none" },
-                                          }
-                                }
+                                style={{
+                                    "&:before": {
+                                        ...(level2.id &&
+                                            !structureState.structure[
+                                                level2.id
+                                            ] && {
+                                                display: "none",
+                                            }),
+                                    },
+                                    ...(level2.id &&
+                                        highlightState.highlight[level2.id] &&
+                                        hightlightIndicator),
+                                }}
                             />
                             <Box
                                 component="ol"
@@ -156,19 +191,23 @@ export default function OrgChart() {
                                                 }
                                                 name={level3.name}
                                                 title={level3.jobTitle}
-                                                style={
-                                                    level3.id &&
-                                                    structureState.structure[
-                                                        level3.id
-                                                    ]
-                                                        ? {}
-                                                        : {
-                                                              "&:before": {
-                                                                  display:
-                                                                      "none",
-                                                              },
-                                                          }
-                                                }
+                                                style={{
+                                                    "&:before": {
+                                                        ...(level3.id &&
+                                                            !structureState
+                                                                .structure[
+                                                                level3.id
+                                                            ] && {
+                                                                display: "none",
+                                                            }),
+                                                    },
+                                                    ...(level3.id &&
+                                                        highlightState
+                                                            .highlight[
+                                                            level3.id
+                                                        ] &&
+                                                        hightlightIndicator),
+                                                }}
                                             />
                                             <Box
                                                 component="ol"
@@ -204,6 +243,27 @@ export default function OrgChart() {
                                                                 title={
                                                                     level4.jobTitle
                                                                 }
+                                                                style={{
+                                                                    "&:before":
+                                                                        {
+                                                                            ...(level4.id &&
+                                                                                !structureState
+                                                                                    .structure[
+                                                                                    level4
+                                                                                        .id
+                                                                                ] && {
+                                                                                    display:
+                                                                                        "none",
+                                                                                }),
+                                                                        },
+                                                                    ...(level4.id &&
+                                                                        highlightState
+                                                                            .highlight[
+                                                                            level4
+                                                                                .id
+                                                                        ] &&
+                                                                        hightlightIndicator),
+                                                                }}
                                                             />
                                                         </Box>
                                                     )

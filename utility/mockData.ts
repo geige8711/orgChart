@@ -80,7 +80,7 @@ export const employeeList: Employee[] = [
     },
     {
         id: 8,
-        name: "Archer Rudall",
+        name: "Jordan Powers",
         level: 4,
         jobTitle: "Developer",
         profileImageUrl: `https://i.pravatar.cc/${Math.floor(
@@ -100,7 +100,7 @@ export const employeeList: Employee[] = [
     },
     {
         id: 10,
-        name: "Ali Skertchly",
+        name: "David Battye",
         level: 4,
         jobTitle: "Developer",
         profileImageUrl: `https://i.pravatar.cc/${Math.floor(
@@ -130,7 +130,7 @@ export const employeeList: Employee[] = [
     },
     {
         id: 13,
-        name: "Jordan Wardill",
+        name: "Cody Harrhy",
         level: 4,
         jobTitle: "Developer",
         profileImageUrl: `https://i.pravatar.cc/${Math.floor(
