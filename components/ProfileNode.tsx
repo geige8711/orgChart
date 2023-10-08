@@ -6,26 +6,31 @@ import {
     KeyboardDoubleArrowDownSharp,
     KeyboardDoubleArrowUpSharp,
 } from "@mui/icons-material";
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
+import { StructureState, updateStructure } from "../redux/slices/structure";
 
 export interface ProfileNodeProps {
+    id: number | undefined;
     title: string;
     name: string;
     profileImgSrc: string;
     level: 1 | 2 | 3 | 4;
-    onExpandClick?: () => void;
     style?: SxProps<Theme>;
 }
 
 export default function ProfileNode({
+    id,
     name,
     title,
     profileImgSrc,
     level,
-    onExpandClick,
     style,
 }: ProfileNodeProps) {
+    const dispatch = useAppDispatch();
+    const structureState = useAppSelector((state) => state.structure);
+
     const { rectangle, expandIndicator, level1, level2, level3, level4 } =
-        useStyles({ isLevel2Expand: true });
+        useStyles();
     const [isExpand, setIsExpand] = React.useState<boolean>(false);
     const getLevelClass = (level: number) => {
         switch (level) {
@@ -87,10 +92,16 @@ export default function ProfileNode({
             {level !== 4 && (
                 <Box
                     onClick={() => {
-                        if (onExpandClick) {
-                            onExpandClick();
+                        const copiedStructureState: StructureState = JSON.parse(
+                            JSON.stringify(structureState)
+                        );
+                        if (id) {
+                            copiedStructureState.structure[id] = !isExpand;
+                            dispatch(updateStructure(copiedStructureState));
                         }
-                        setIsExpand((o) => !o);
+                        setIsExpand((o) => {
+                            return !o;
+                        });
                     }}
                     component="div"
                     className={expandIndicator}

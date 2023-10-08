@@ -1,9 +1,9 @@
 import { Theme } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 
-export interface ChartStyleProps {
-    isLevel2Expand?: boolean;
-}
+// export interface ChartStyleProps {
+//     isLevel2Expand?: boolean;
+// }
 
 const useStyles = makeStyles((theme: Theme) => ({
     container: {
@@ -33,8 +33,9 @@ const useStyles = makeStyles((theme: Theme) => ({
             left: "50%",
             transform: "translateX(-50%)",
             width: "2px",
-            height: (props: ChartStyleProps) =>
-                props.isLevel2Expand ? "20px" : "0px",
+            height: "20px",
+            // height: (props: ChartStyleProps) =>
+            //     props.isLevel2Expand ? "20px" : "0px",
             backgroundColor: "black",
             [theme.breakpoints.down(700)]: {
                 display: "none",
