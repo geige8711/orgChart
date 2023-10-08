@@ -105,7 +105,7 @@ export default function SearchBar() {
                 }}
                 value={search}
                 variant="outlined"
-                placeholder="Search..."
+                placeholder="Search Employee Name"
                 size="medium"
             />
             {result === 0 && search && (
