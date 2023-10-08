@@ -5,8 +5,8 @@ import {
     Button,
     IconButton,
     Drawer,
-    Link,
     MenuItem,
+    Box,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { makeStyles } from "@mui/styles";
@@ -33,6 +33,8 @@ const headersData = [
 
 const useStyles = makeStyles({
     header: {
+        top: 0,
+        position: "sticky",
         backgroundColor: "#400CCC",
         paddingRight: "79px",
         paddingLeft: "118px",
@@ -108,28 +110,24 @@ export default function Navbar() {
         return (
             <Toolbar>
                 <IconButton
-                    {...{
-                        edge: "start",
-                        color: "inherit",
-                        "aria-label": "menu",
-                        "aria-haspopup": "true",
-                        onClick: handleDrawerOpen,
-                    }}
+                    edge="start"
+                    color="inherit"
+                    aria-label="menu"
+                    aria-haspopup="true"
+                    onClick={handleDrawerOpen}
                 >
                     <MenuIcon />
                 </IconButton>
 
                 <Drawer
-                    {...{
-                        anchor: "left",
-                        open: drawerOpen,
-                        onClose: handleDrawerClose,
-                    }}
+                    anchor="left"
+                    open={drawerOpen}
+                    onClose={handleDrawerClose}
                 >
-                    <div className={drawerContainer}>{getDrawerChoices()}</div>
+                    <Box className={drawerContainer}>{getDrawerChoices()}</Box>
                 </Drawer>
 
-                <div>{femmecubatorLogo}</div>
+                <Box>{femmecubatorLogo}</Box>
             </Toolbar>
         );
     };
@@ -171,10 +169,8 @@ export default function Navbar() {
     };
 
     return (
-        <header>
-            <AppBar className={header}>
-                {mobileView ? displayMobile() : displayDesktop()}
-            </AppBar>
-        </header>
+        <AppBar className={header}>
+            {mobileView ? displayMobile() : displayDesktop()}
+        </AppBar>
     );
 }

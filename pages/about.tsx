@@ -1,6 +1,6 @@
 import { makeStyles } from "@mui/styles";
 import Navbar from "../components/Navbar";
-import { Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 
 const useStyles = makeStyles({
     p: {
@@ -11,11 +11,11 @@ const useStyles = makeStyles({
 export default function About() {
     const { p } = useStyles();
     return (
-        <div>
+        <Box>
             <Navbar />
             <Typography variant="h6" component="h1" className={p}>
                 This is About Page
             </Typography>
-        </div>
+        </Box>
     );
 }
