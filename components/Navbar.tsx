@@ -11,6 +11,7 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 import { makeStyles } from "@mui/styles";
 import React, { useState, useEffect } from "react";
+import CloseIcon from "@mui/icons-material/Close";
 
 const headersData = [
     {
@@ -59,7 +60,11 @@ const useStyles = makeStyles({
         justifyContent: "space-between",
     },
     drawerContainer: {
-        padding: "20px 30px",
+        padding: "40px 60px 0px 10px",
+        display: "flex",
+        flexDirection: "column",
+        position: "relative",
+        alignItems: "flex-start",
     },
 });
 
@@ -124,7 +129,20 @@ export default function Navbar() {
                     open={drawerOpen}
                     onClose={handleDrawerClose}
                 >
-                    <Box className={drawerContainer}>{getDrawerChoices()}</Box>
+                    <Box className={drawerContainer}>
+                        {getDrawerChoices()}
+                        <CloseIcon
+                            onClick={handleDrawerClose}
+                            htmlColor="black"
+                            fontSize="large"
+                            sx={{
+                                position: "absolute",
+                                right: 0,
+                                top: 0,
+                                cursor: "pointer",
+                            }}
+                        />
+                    </Box>
                 </Drawer>
 
                 <Box>{femmecubatorLogo}</Box>
