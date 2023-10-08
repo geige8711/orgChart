@@ -1,6 +1,7 @@
 import * as React from "react";
 import Document, { Html, Head, Main, NextScript } from "next/document";
 import createEmotionServer from "@emotion/server/create-instance";
+import { ServerStyleSheets } from "@mui/styles";
 
 import createEmotionCache from "../utility/createEmotionCache";
 
@@ -9,6 +10,10 @@ export default class MyDocument extends Document {
         return (
             <Html lang="en">
                 <Head>
+                    <meta
+                        name="viewport"
+                        content="initial-scale=1, width=device-width"
+                    />
                     <link
                         rel="stylesheet"
                         href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
@@ -54,12 +59,12 @@ MyDocument.getInitialProps = async (ctx) => {
     // However, be aware that it can have global side effects.
     const cache = createEmotionCache();
     const { extractCriticalToChunks } = createEmotionServer(cache);
-
+    const sheets = new ServerStyleSheets();
     /* eslint-disable */
     ctx.renderPage = () =>
         originalRenderPage({
             enhanceApp: (App: any) => (props) =>
-                <App emotionCache={cache} {...props} />,
+                sheets.collect(<App emotionCache={cache} {...props} />),
         });
     /* eslint-enable */
 
@@ -82,6 +87,7 @@ MyDocument.getInitialProps = async (ctx) => {
         styles: [
             ...React.Children.toArray(initialProps.styles),
             ...emotionStyleTags,
+            sheets.getStyleElement(),
         ],
     };
 };

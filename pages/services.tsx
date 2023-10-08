@@ -7,13 +7,14 @@ const useStyles = makeStyles({
         marginTop: "100px",
     },
 });
-export default function Index() {
+
+export default function Services() {
     const { p } = useStyles();
     return (
         <div>
             <Navbar />
             <Typography variant="h6" component="h1" className={p}>
-                This is Home Page
+                This is Services Page
             </Typography>
         </div>
     );
