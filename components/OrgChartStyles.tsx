@@ -1,6 +1,10 @@
 import { Theme } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 
+export interface ChartStyleProps {
+    isLevel2Expand?: boolean;
+}
+
 const useStyles = makeStyles((theme: Theme) => ({
     container: {
         maxWidth: "1000px",
@@ -29,7 +33,8 @@ const useStyles = makeStyles((theme: Theme) => ({
             left: "50%",
             transform: "translateX(-50%)",
             width: "2px",
-            height: "20px",
+            height: (props: ChartStyleProps) =>
+                props.isLevel2Expand ? "20px" : "0px",
             backgroundColor: "black",
             [theme.breakpoints.down(700)]: {
                 display: "none",
@@ -53,6 +58,7 @@ const useStyles = makeStyles((theme: Theme) => ({
         position: "relative",
         display: "grid",
         gridTemplateColumns: "repeat(2, 1fr)",
+        transition: "height 7s linear",
         [theme.breakpoints.down(700)]: {
             display: "block",
             width: "90%",
@@ -188,6 +194,14 @@ const useStyles = makeStyles((theme: Theme) => ({
             width: "20px",
             height: "2px",
             backgroundColor: "black",
+        },
+    },
+    expandIndicator: {
+        animation: `$blink 1s infinite`,
+    },
+    "@keyframes blink": {
+        "50%": {
+            opacity: 0,
         },
     },
 }));

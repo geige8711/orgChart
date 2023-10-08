@@ -22,7 +22,7 @@ export default function ProfileCard({
             component="div"
             sx={{
                 display: "flex",
-                flexDirection: "row",
+                flexDirection: "column",
                 justifyContent: "center",
                 alignItems: "center",
             }}
@@ -35,17 +35,13 @@ export default function ProfileCard({
             <Box
                 component="div"
                 sx={{
-                    display: "grid",
-                    gridTemplateColumns: "1fr",
-                    gridTemplateRows: "1fr 1fr",
-                    marginLeft: "35px !important",
-                    alignItems: "end",
+                    display: "Column",
                 }}
             >
                 <Box
                     component="div"
                     sx={{
-                        fontSize: "20px",
+                        fontSize: "16px",
                     }}
                 >
                     {name}
@@ -53,7 +49,7 @@ export default function ProfileCard({
                 <Box
                     component="div"
                     sx={{
-                        fontSize: "16px",
+                        fontSize: "14px",
                         fontWeight: "normal",
                     }}
                 >
